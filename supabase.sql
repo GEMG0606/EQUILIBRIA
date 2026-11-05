@@ -10,3 +10,7 @@ create index if not exists scores_game_idx on public.scores(game, score desc);
 alter table public.scores enable row level security;
 create policy "public read" on public.scores for select using (true);
 create policy "public insert" on public.scores for insert with check (true);
+
+-- Required on newer Supabase projects: expose the table to the public API
+grant usage on schema public to anon, authenticated;
+grant select, insert on public.scores to anon, authenticated;

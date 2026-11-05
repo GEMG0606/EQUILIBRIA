@@ -6,7 +6,8 @@ const GAMES=[
 {t:'Slutsky Lab',s:'Effects & Concepts',e:'🔬',c:'#a78bfa',d:'Split substitution from income effects, then detect the good.'}];
 let rows=[],cur=0;
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-async function load(){try{const r=await fetch(CFG.URL+'/rest/v1/scores?select=name,game,score,time_ms,created_at&limit=5000',{headers:{apikey:CFG.KEY}});const j=await r.json();rows=Array.isArray(j)?j:[]}catch(e){}draw()}
+async function load(){try{const r=await fetch(CFG.URL+'/rest/v1/scores?select=name,game,score,time_ms,created_at&limit=5000',{headers:{apikey:CFG.KEY}});const j=await r.json();if(!Array.isArray(j))throw (j.message||r.status);rows=j;note('')}catch(e){note('⚠️ Leaderboard unavailable: '+(e.message||e)+'. Run supabase.sql in Supabase.')}draw()}
+function note(t){let n=$('#note');if(!n){n=document.createElement('div');n.id='note';n.style.cssText='background:#7f1d1d;color:#fff;padding:8px 5vw;font-size:.85rem';document.body.prepend(n)}n.textContent=t;n.style.display=t?'block':'none'}
 function board(g){const m={};rows.forEach(r=>{if(g&&r.game!=g)return;const k=r.name.toLowerCase()+'|'+r.game,o=m[k];if(!o||r.score>o.score||(r.score==o.score&&r.time_ms<o.time_ms))m[k]=r});
 const b=Object.values(m);if(g)return b.map(r=>({name:r.name,score:r.score,time:r.time_ms,at:r.created_at})).sort((a,c)=>c.score-a.score||a.time-c.time||a.at.localeCompare(c.at));
 const t={};b.forEach(r=>{const k=r.name.toLowerCase();t[k]=t[k]||{name:r.name,score:0,time:0};t[k].score+=r.score;t[k].time+=r.time_ms});return Object.values(t).sort((a,c)=>c.score-a.score||a.time-c.time)}
@@ -22,6 +23,6 @@ function finish(n,sc,ms){clearTimers();sc=Math.round(Math.max(0,Math.min(1000,sc
 $('#stage').innerHTML=`<div class="result"><div class="big">${sc}<small>/1000</small></div><p>${grade(sc)}</p><p class="mut">Time ${(ms/1000).toFixed(1)}s · only your best attempt counts</p><input id="nm" maxlength="24" placeholder="Your name (shown on leaderboard)" value="${esc(localStorage.eq_name||'')}"><div class="row" style="justify-content:center"><button id="sub" class="btn">Submit score</button><button id="again" class="btn ghost">Play again</button></div><p id="msg" class="mut"></p></div>`;
 $('#again').onclick=()=>run(n);
 $('#sub').onclick=async()=>{const nm=$('#nm').value.trim();if(!nm){$('#msg').textContent='Enter a name first.';return}localStorage.eq_name=nm;$('#sub').disabled=true;
-try{const r=await fetch(CFG.URL+'/rest/v1/scores',{method:'POST',headers:{...H,Prefer:'return=minimal'},body:JSON.stringify({name:nm,game:n,score:sc,time_ms:ms})});if(!r.ok)throw 0;$('#msg').textContent='✅ Submitted! It shows on the leaderboard if it is your best.';$('#sub').remove();load()}catch(e){$('#msg').textContent='Could not submit. Check connection and try again.';$('#sub').disabled=false}}}
+try{const r=await fetch(CFG.URL+'/rest/v1/scores',{method:'POST',headers:{...H,Prefer:'return=minimal'},body:JSON.stringify({name:nm,game:n,score:sc,time_ms:ms})});if(!r.ok)throw new Error(r.status+' '+(await r.text()));$('#msg').textContent='✅ Submitted! It shows on the leaderboard if it is your best.';$('#sub').remove();load()}catch(e){$('#msg').textContent='Could not submit: '+e.message;$('#sub').disabled=false}}}
 function route(){clearTimers();const m=/^#g([1-4])$/.exec(location.hash);m&&+m[1]<=CFG.OPEN_GAMES?game(+m[1]):home()}
 onhashchange=route;route();load();setInterval(load,15000);
