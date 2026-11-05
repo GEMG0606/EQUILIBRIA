@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Equilibria | Economics games</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%230f766e'/%3E%3Ccircle cx='20' cy='25' r='5' fill='%23f59e0b'/%3E%3C/svg%3E">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="games.js"></script><script src="equilibria.js"></script></head>
+<body>
+<div id="hd"></div>
+<div class="wrap" style="padding-top:28px;padding-bottom:60px">
+  <h1 style="font:700 36px Fraunces,serif;margin:0 0 4px">Play economics. Top the board.</h1>
+  <p class="mut" style="margin:0 0 24px">Clear each level to unlock the next. Three ranked tries per game.</p>
+  <div id="auth" class="card" style="max-width:420px;margin-bottom:24px;display:none"></div>
+  <div id="me" class="card" style="margin-bottom:24px;display:none"></div>
+  <div class="grid" id="games"></div>
+  <h2 style="margin-top:40px">Overall leaderboard <span class="mut" style="font-size:14px;font-weight:400">live, out of 4,000</span></h2>
+  <div class="card" id="lb"></div>
+</div>
+<script>
+(async()=>{
+  const $=Eq.$, p=await Eq.player(), d=await Eq.done();
+  $("#hd").innerHTML=Eq.head(p?`<button class="btn ghost" onclick="Eq.logout()">Log out</button>`:"");
+  if(Eq.demo)$("#hd").insertAdjacentHTML("afterend",`<div style="background:var(--acc);color:#1b1300;text-align:center;padding:6px;font-size:13px">Demo mode: scores stay in this browser. Add Supabase keys in equilibria.js to go live.</div>`);
+  if(p){$("#me").style.display="block";$("#me").innerHTML=`Playing as <b>${Eq.esc(p.name)}</b> <span class="mut">(${Eq.esc(p.section)})</span>`;}
+  else authUI();
+  $("#games").innerHTML=GAMES.map((g,i)=>{
+    const open=p&&g.ready&&(i==0||d[GAMES[i-1].id]);
+    const why=!p?"Log in to play":!g.ready?"Coming soon":!open?`Finish level ${i} first`:"";
+    return `<div class="card" style="${open?"":"opacity:.6"}"><div class="mut" style="font-size:13px">LEVEL ${i+1} ${g.isNew?'<span class="tag">New</span>':""} ${d[g.id]?"✓":""}</div>
+    <h3 style="margin:6px 0 2px">${g.title}</h3><div class="mut" style="font-size:13px;margin-bottom:8px">${g.topic}</div><p style="font-size:14px">${g.blurb}</p>
+    ${open?`<a class="btn" style="display:inline-block" href="${g.file}">Play</a>`:`<button class="btn" disabled>🔒 ${why}</button>`}</div>`}).join("");
+  Eq.board($("#lb"),null);
+  function authUI(){
+    const a=$("#auth");a.style.display="block";
+    a.innerHTML=`<h3 style="margin-top:0">Join</h3><label>Full name<input id="n" autocomplete="name"></label><label>Section / batch<input id="s"></label>${Eq.demo?"":`<label>College email<input id="e" type="email"></label>`}<button class="btn" id="go">${Eq.demo?"Start":"Send code"}</button><p class="mut" id="msg" style="font-size:13px"></p>`;
+    $("#go").onclick=async()=>{
+      const n=$("#n").value.trim(),s=$("#s").value.trim(),e=$("#e")?.value.trim();
+      if(!n||!s||(!Eq.demo&&!e))return $("#msg").textContent="Fill in every field.";
+      try{await Eq.sendCode(e,n,s);}catch(x){return $("#msg").textContent=x.message}
+      if(Eq.demo)return location.reload();
+      a.innerHTML=`<h3 style="margin-top:0">Enter the code</h3><p class="mut">We emailed a code to ${Eq.esc(e)}.</p><input id="c" inputmode="numeric"><button class="btn" id="v">Verify</button><p id="m2" class="mut"></p>`;
+      $("#v").onclick=async()=>{try{await Eq.verify(e,$("#c").value.trim());location.reload()}catch(x){$("#m2").textContent=x.message}};
+    };
+  }
+})();
+</script></body></html>
