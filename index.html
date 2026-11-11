@@ -97,7 +97,7 @@ input{max-width:none}
 <main id="app"></main>
 <script>
 // Supabase settings. OPEN_GAMES: how many games are playable (1-6). Raise it for weekly drops.
-window.CFG={URL:'https://hhmgivitibmvvenoteiv.supabase.co',KEY:'sb_publishable_dY3kcPyEpE-S2YPfKL8wiQ_-fAXM32Q',OPEN_GAMES:4};
+window.CFG={URL:'https://hhmgivitibmvvenoteiv.supabase.co',KEY:'sb_publishable_dY3kcPyEpE-S2YPfKL8wiQ_-fAXM32Q',OPEN_GAMES:4,RESET:'v1'};
 
 const $=(s,e=document)=>e.querySelector(s),R=(a,b)=>a+Math.random()*(b-a),RI=(a,b)=>Math.floor(R(a,b+1)),sh=a=>[...a].sort(()=>Math.random()-.5);
 const timers=[],every=(f,ms)=>{const i=setInterval(f,ms);timers.push(i);return i},clearTimers=()=>timers.splice(0).forEach(clearInterval);
@@ -233,6 +233,8 @@ topScroll($('#stage'));$('#again').onclick=()=>{run(n);topScroll($('#stage'))};
 $('#sub').onclick=async()=>{const nm=$('#nm').value.trim();if(!nm){$('#msg').textContent='Enter a name first.';return}localStorage.eq_name=nm;$('#sub').disabled=true;
 try{const r=await fetch(CFG.URL+'/rest/v1/scores',{method:'POST',headers:{...H,Prefer:'return=minimal'},body:JSON.stringify({name:nm,game:n,score:sc,time_ms:ms})});if(!r.ok)throw new Error(r.status+' '+(await r.text()));$('#msg').textContent='✅ Submitted! It shows on the leaderboard if it is your best.';$('#sub').remove();load()}catch(e){$('#msg').textContent='Could not submit: '+e.message;$('#sub').disabled=false}}}
 function route(){clearTimers();scrollTo(0,0);const m=/^#g([1-6])$/.exec(location.hash);m&&+m[1]<=CFG.OPEN_GAMES?game(+m[1]):home()}
+// Change CFG.RESET (e.g. 'v2') to wipe every player's saved 'Your best' scores on their next visit.
+try{if(localStorage.eq_reset!==CFG.RESET){Object.keys(localStorage).filter(k=>k.startsWith('eq_best_')).forEach(k=>localStorage.removeItem(k));localStorage.eq_reset=CFG.RESET}}catch(e){}
 onhashchange=route;route();load();setInterval(load,15000);
 
 </script></body></html>
