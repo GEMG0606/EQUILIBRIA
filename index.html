@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Equilibria · FEBS Economics Games</title><link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMjJkM2VlIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjYTc4YmZhIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTYiIGZpbGw9IiMwYjEwMjYiLz48cGF0aCBkPSJNMTIgMTQgTDUyIDUwIiBzdHJva2U9IiMyMmQzZWUiIHN0cm9rZS13aWR0aD0iNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PHBhdGggZD0iTTEyIDUwIEw1MiAxNCIgc3Ryb2tlPSIjZmJiZjI0IiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxjaXJjbGUgY3g9IjMyIiBjeT0iMzIiIHI9IjciIGZpbGw9IiNmZmYiIHN0cm9rZT0idXJsKCNnKSIgc3Ryb2tlLXdpZHRoPSI0Ii8+PC9zdmc+"><style>*{box-sizing:border-box;margin:0}
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#070b1f"><meta name="color-scheme" content="dark"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><title>Equilibria · FEBS Economics Games</title><link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMjJkM2VlIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjYTc4YmZhIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTYiIGZpbGw9IiMwYjEwMjYiLz48cGF0aCBkPSJNMTIgMTQgTDUyIDUwIiBzdHJva2U9IiMyMmQzZWUiIHN0cm9rZS13aWR0aD0iNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PHBhdGggZD0iTTEyIDUwIEw1MiAxNCIgc3Ryb2tlPSIjZmJiZjI0IiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxjaXJjbGUgY3g9IjMyIiBjeT0iMzIiIHI9IjciIGZpbGw9IiNmZmYiIHN0cm9rZT0idXJsKCNnKSIgc3Ryb2tlLXdpZHRoPSI0Ii8+PC9zdmc+"><style>*{box-sizing:border-box;margin:0}
 :root{--bg:#070b1f;--g:rgba(255,255,255,.07);--b:rgba(255,255,255,.14);--t:#e8ecff;--m:#93a0cf;--c:#22d3ee}
 body{font:16px/1.5 system-ui,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--t);min-height:100vh;overflow-x:hidden}
 .blob{position:fixed;border-radius:50%;filter:blur(90px);opacity:.45;z-index:-1;animation:fl 14s ease-in-out infinite alternate}
@@ -49,6 +49,48 @@ svg.g{width:100%;max-width:380px;background:rgba(0,0,0,.25);border-radius:12px}
 details.rules summary{cursor:pointer;color:var(--c);font-weight:700}
 .hint{margin:8px 0;font-size:.85rem;color:var(--m)}.hint summary{cursor:pointer;color:var(--c)}
 .card.locked{filter:grayscale(1);opacity:.5;cursor:not-allowed}.card.locked:hover{transform:none;box-shadow:none;border-color:var(--b)}.card.locked .go{color:var(--m)}
+
+/* ---------- Mobile & touch ---------- */
+html{-webkit-text-size-adjust:100%;touch-action:manipulation}
+body{min-height:100vh;min-height:100dvh;padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right);padding-bottom:env(safe-area-inset-bottom);-webkit-tap-highlight-color:transparent}
+button{touch-action:manipulation;-webkit-user-select:none;user-select:none;font-family:inherit}
+input[type=range]{-webkit-appearance:none;appearance:none;background:transparent;width:100%;height:38px;touch-action:pan-y}
+input[type=range]::-webkit-slider-runnable-track{height:8px;border-radius:9px;background:rgba(255,255,255,.22)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;border-radius:50%;background:#22d3ee;border:3px solid #fff;margin-top:-10px;box-shadow:0 2px 8px rgba(0,0,0,.4)}
+input[type=range]::-moz-range-track{height:8px;border-radius:9px;background:rgba(255,255,255,.22)}
+input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:#22d3ee;border:3px solid #fff}
+input[type=range]:disabled{opacity:.5}
+svg.g{display:block;margin:8px auto;height:auto}
+.result input{display:block;margin:10px auto}
+.btn,.opt{min-height:44px}
+@media(hover:none){.card:hover{transform:none;box-shadow:none;border-color:var(--b)}.btn:hover{transform:none}.opt:hover:not(.sel):not(.ok):not(.bad){border-color:var(--b);background:var(--g)}}
+@media(prefers-reduced-motion:reduce){.blob{animation:none}.card,.btn,.opt{transition:none}}
+@media(max-width:600px){
+header{padding:12px 4vw;gap:8px;flex-wrap:wrap}.brand{font-size:1.2rem}.tag{font-size:.72rem}
+main{padding:0 4vw 40px}
+.hero{padding:18px 0 14px}.hero p{font-size:.9rem}
+.blob{filter:blur(60px);animation:none;opacity:.35}.b1{width:260px;height:260px}.b2{width:240px;height:240px}.b3{width:220px;height:220px}
+.card,.panel{padding:16px;border-radius:16px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.card .em{font-size:2.1rem}.grid{gap:12px;margin-bottom:16px}
+h2{font-size:1.05rem}h2 small{display:block;margin:2px 0 0}
+.back{padding:10px 0;margin:0 0 6px;font-size:1rem}
+.gwrap{gap:12px}
+.btn{padding:13px 20px;font-size:1rem;margin:8px 6px 0 0}
+.row .btn{flex:1;margin-right:0}.row{gap:8px}
+.opt{padding:14px;font-size:1rem}.opts{gap:8px}
+.grp{gap:6px;margin:8px 0}.grp span{width:100%;font-weight:600}.grp .opt.sm{flex:1;margin:0;padding:10px 6px;text-align:center;min-width:64px}
+.claim{font-size:1.05rem;margin:8px 0 12px}
+.stats{gap:8px}.stats div{padding:8px 4px;font-size:.72rem}.stats b{font-size:1.25rem}
+.food{font-size:1.7rem}
+.big{font-size:3.6rem}
+.legend ul{grid-template-columns:1fr}
+.rules{padding:10px 12px;font-size:.86rem}
+.lb li{padding:10px 8px}
+#ok.btn{position:sticky;bottom:calc(10px + env(safe-area-inset-bottom));width:100%;margin:10px 0 0;z-index:5;box-shadow:0 6px 24px rgba(0,0,0,.5)}
+#nx.btn{width:100%;margin:10px 0 0}
+input{max-width:none}
+}
+@media(max-width:360px){.btn{padding:12px 14px}.grp .opt.sm{min-width:56px;font-size:.9rem}.big{font-size:3rem}}
 </style></head><body>
 <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
 <header><a class="brand" href="#"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMjJkM2VlIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjYTc4YmZhIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTYiIGZpbGw9IiMwYjEwMjYiLz48cGF0aCBkPSJNMTIgMTQgTDUyIDUwIiBzdHJva2U9IiMyMmQzZWUiIHN0cm9rZS13aWR0aD0iNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PHBhdGggZD0iTTEyIDUwIEw1MiAxNCIgc3Ryb2tlPSIjZmJiZjI0IiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxjaXJjbGUgY3g9IjMyIiBjeT0iMzIiIHI9IjciIGZpbGw9IiNmZmYiIHN0cm9rZT0idXJsKCNnKSIgc3Ryb2tlLXdpZHRoPSI0Ii8+PC9zdmc+" alt="" width="38" height="38">Equilibria</a><span class="tag">by FEBS · IIT Bhubaneswar</span></header>
@@ -63,7 +105,8 @@ const G={};
 const grp=(id,lab,o)=>`<div class="grp" id="${id}"><span>${lab}</span>${o.map(([v,t])=>`<button class="opt sm" data-v="${v}">${t}</button>`).join('')}</div>`;
 const grpInit=el=>el.querySelectorAll('.grp').forEach(g=>g.querySelectorAll('button').forEach(b=>b.onclick=()=>{g.querySelectorAll('button').forEach(x=>x.classList.remove('sel'));b.classList.add('sel')}));
 const val=(el,id)=>{const b=$('#'+id+' .sel',el);return b?b.dataset.v:null};
-const nextBtn=(el,f,t='Next →')=>{el.insertAdjacentHTML('beforeend',`<button class="btn" id="nx">${t}</button>`);$('#nx',el).onclick=f};
+const topScroll=el=>{const r=el.getBoundingClientRect();if(r.top<0)scrollTo({top:scrollY+r.top-70,behavior:'smooth'})};
+const nextBtn=(el,f,t='Next →')=>{el.insertAdjacentHTML('beforeend',`<button class="btn" id="nx">${t}</button>`);const b=$('#nx',el);b.onclick=()=>{f();topScroll(el)};b.scrollIntoView({block:'nearest',behavior:'smooth'})};
 
 /* ---------- GAME 1: Utility Rush ---------- */
 const CL=[
@@ -182,14 +225,14 @@ function home(){cur=0;app.innerHTML=`<section class="hero"><h1>Think. Play. <spa
 <section class="grid">${GAMES.map((g,i)=>{const n=i+1,ok=n<=CFG.OPEN_GAMES;return `<${ok?'a':'div'} class="card${ok?'':' locked'}" style="--c:${g.c}" ${ok?'href="#g'+n+'"':''}><div class="em">${g.e}</div><b>Game ${n}</b><h3>${g.t}</h3><i>${g.s}</i><p>${g.d}</p><div class="bestline" data-g="${n}"></div><span class="go">${ok?'Play →':'🔒 Coming soon'}</span></${ok?'a':'div'}>`}).join('')}</section>
 <section class="panel"><h2>🏆 Overall leaderboard <small>sum of best scores · out of 4,000</small></h2><div id="lbHome"></div></section>`;draw()}
 function game(n){cur=n;const g=GAMES[n-1];app.innerHTML=`<a class="back" href="#">← All games</a><div class="gwrap"><section class="panel play" style="--c:${g.c}"><h2>${g.e} ${g.t} <small>${g.s}</small></h2><div id="stage"></div><details class="rules"><summary>📖 Rules (open any time)</summary>${G[n].rules}</details></section><aside class="panel"><h2>🏆 ${g.t} <small>best scores</small></h2><div id="lb"></div></aside></div>`;draw();run(n)}
-function run(n){clearTimers();const st=$('#stage'),g=G[n];st.innerHTML=`<div class="intro">${g.intro}<div class="rules"><h4>📖 Detailed rules</h4>${g.rules}</div><button id="go" class="btn">Start</button></div>`;$('#go').onclick=()=>{const t0=Date.now();st.innerHTML='';g.play(st,sc=>finish(n,sc,Date.now()-t0))}}
+function run(n){clearTimers();const st=$('#stage'),g=G[n];st.innerHTML=`<div class="intro">${g.intro}<div class="rules"><h4>📖 Detailed rules</h4>${g.rules}</div><button id="go" class="btn">Start</button></div>`;$('#go').onclick=()=>{const t0=Date.now();st.innerHTML='';g.play(st,sc=>finish(n,sc,Date.now()-t0));topScroll(st)}}
 const grade=s=>s>=900?'🏅 Brilliant!':s>=700?'🔥 Strong run':s>=450?'👍 Solid, try to beat it':'🌱 Keep practising';
 function finish(n,sc,ms){clearTimers();sc=Math.round(Math.max(0,Math.min(1000,sc)));const k='eq_best_'+n;if(sc>(+localStorage[k]||0))localStorage[k]=sc;
 $('#stage').innerHTML=`<div class="result"><div class="big">${sc}<small>/1000</small></div><p>${grade(sc)}</p><p class="mut">Time ${(ms/1000).toFixed(1)}s · only your best attempt counts</p><input id="nm" maxlength="24" placeholder="Your name (shown on leaderboard)" value="${esc(localStorage.eq_name||'')}"><div class="row" style="justify-content:center"><button id="sub" class="btn">Submit score</button><button id="again" class="btn ghost">Play again</button></div><p id="msg" class="mut"></p></div>`;
-$('#again').onclick=()=>run(n);
+topScroll($('#stage'));$('#again').onclick=()=>{run(n);topScroll($('#stage'))};
 $('#sub').onclick=async()=>{const nm=$('#nm').value.trim();if(!nm){$('#msg').textContent='Enter a name first.';return}localStorage.eq_name=nm;$('#sub').disabled=true;
 try{const r=await fetch(CFG.URL+'/rest/v1/scores',{method:'POST',headers:{...H,Prefer:'return=minimal'},body:JSON.stringify({name:nm,game:n,score:sc,time_ms:ms})});if(!r.ok)throw new Error(r.status+' '+(await r.text()));$('#msg').textContent='✅ Submitted! It shows on the leaderboard if it is your best.';$('#sub').remove();load()}catch(e){$('#msg').textContent='Could not submit: '+e.message;$('#sub').disabled=false}}}
-function route(){clearTimers();const m=/^#g([1-6])$/.exec(location.hash);m&&+m[1]<=CFG.OPEN_GAMES?game(+m[1]):home()}
+function route(){clearTimers();scrollTo(0,0);const m=/^#g([1-6])$/.exec(location.hash);m&&+m[1]<=CFG.OPEN_GAMES?game(+m[1]):home()}
 onhashchange=route;route();load();setInterval(load,15000);
 
 </script></body></html>
